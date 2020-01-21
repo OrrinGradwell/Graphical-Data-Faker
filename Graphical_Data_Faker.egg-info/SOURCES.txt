@@ -1,0 +1,8 @@
+README.md
+setup.py
+Graphical_Data_Faker.egg-info/PKG-INFO
+Graphical_Data_Faker.egg-info/SOURCES.txt
+Graphical_Data_Faker.egg-info/dependency_links.txt
+Graphical_Data_Faker.egg-info/top_level.txt
+graphical-data-faker/__init__.py
+graphical-data-faker/gdf.py
