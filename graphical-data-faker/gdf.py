@@ -9,7 +9,6 @@ from faker import Faker
 fake = Faker()
 
 
-""" Luhn Logic """
 def luhn():
     def luhn_checksum(idnum):
         def digits_of(n):
@@ -23,7 +22,6 @@ def luhn():
         for d in even_digits:
             checksum += sum(digits_of(d * 2))
         return checksum % 10
-
 
     def calculate_luhn(partial_id):
         check_digit = luhn_checksum(int(partial_id) * 10)
@@ -47,7 +45,7 @@ def luhn():
 
 def cell():
     carrier = ['072', '073', '074', '082', '083', '084']
-    threeDigit = str(random.choice (carrier))
+    threeDigit = str(random.choice(carrier))
     sevenDigit = str(randrange(1111111, 9999999))
     global Cell
     Cell = threeDigit + sevenDigit
@@ -59,6 +57,7 @@ def clear():
     RSA_ID_Field.delete(0, END)
     Cell_Field.delete(0, END)
     Email_Field.delete(0, END)
+
 
 def clear_button():
     clear()
@@ -73,8 +72,8 @@ def generate_data():
     last = fake.last_name()
     Lastname_Field.insert(0, last)
 
-    Email = first + '_' + last + '@midev.co.za'
-    Email_Field.insert(0, Email)
+    email = first + '_' + last + '@midev.co.za'
+    Email_Field.insert(0, email)
 
     luhn()
     RSA_ID_Field.insert(0, Generated)
@@ -111,11 +110,11 @@ def copy_rsa_id():
 
 
 def copy_cell():
-    cell = Cell_Field.get()
+    cellphone = Cell_Field.get()
     var = Tk()
     var.withdraw()
     var.clipboard_clear()
-    var.clipboard_append(cell)
+    var.clipboard_append(cellphone)
     var.update()
 
 
