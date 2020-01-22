@@ -1,6 +1,8 @@
 """ Libraries """
 import random
 import tkinter as tk
+import pyperclip
+import datetime
 
 from tkinter import *
 from tkinter import ttk
@@ -9,7 +11,7 @@ from faker import Faker
 fake = Faker()
 
 
-def luhn():
+def luhn(year):
     def luhn_checksum(idnum):
         def digits_of(n):
             return [int(d) for d in str(n)]
@@ -30,7 +32,7 @@ def luhn():
 
     if __name__ == "__main__":
         while True:
-            number = f'{random.randint(70, 99):02d}' + f'{random.randint(1, 12):02d}' + f'{random.randint(1, 28):02d}' + str(random.randint(0000, 9999)) + '0' + str(random.randint(0, 9))
+            number = year + f'{random.randint(1, 12):02d}' + f'{random.randint(1, 28):02d}' + str(random.randint(0000, 9999)) + '0' + str(random.randint(0, 9))
             parity = calculate_luhn(number)
             IdNumber = number + str(parity)
             if len(IdNumber) != 13:
@@ -75,56 +77,51 @@ def generate_data():
     email = first + '_' + last + '@midev.co.za'
     Email_Field.insert(0, email)
 
-    luhn()
-    RSA_ID_Field.insert(0, Generated)
-
     cell()
     Cell_Field.insert(0, Cell)
+
+    current_year = datetime.datetime.today().strftime("%Y")
+    required_age = Choose_Age_Field.get()
+
+    a = int(current_year)
+
+    if not required_age.isdigit():
+        luhn(f'{random.randint(70, 99):02d}')
+    else:
+        b = int(required_age)
+        c = a - b
+        luhn(str(c)[2:])
+
+    RSA_ID_Field.insert(0, Generated)
 
 
 def copy_first_name():
     firstname = Firstname_Field.get()
-    var = Tk()
-    var.withdraw()
-    var.clipboard_clear()
-    var.clipboard_append(firstname)
-    var.update()
+    pyperclip.copy('')
+    pyperclip.copy(firstname)
 
 
 def copy_last_name():
     lastname = Lastname_Field.get()
-    var = Tk()
-    var.withdraw()
-    var.clipboard_clear()
-    var.clipboard_append(lastname)
-    var.update()
-
+    pyperclip.copy('')
+    pyperclip.copy(lastname)
 
 def copy_rsa_id():
     rsa_id = RSA_ID_Field.get()
-    var = Tk()
-    var.withdraw()
-    var.clipboard_clear()
-    var.clipboard_append(rsa_id)
-    var.update()
+    pyperclip.copy('')
+    pyperclip.copy(rsa_id)
 
 
 def copy_cell():
     cellphone = Cell_Field.get()
-    var = Tk()
-    var.withdraw()
-    var.clipboard_clear()
-    var.clipboard_append(cellphone)
-    var.update()
+    pyperclip.copy('')
+    pyperclip.copy(cellphone)
 
 
 def copy_email():
     email = Email_Field.get()
-    var = Tk()
-    var.withdraw()
-    var.clipboard_clear()
-    var.clipboard_append(email)
-    var.update()
+    pyperclip.copy('')
+    pyperclip.copy(email)
 
 
 gdf = Tk()
@@ -148,21 +145,26 @@ Generate_Button.grid(column=0, row=0, pady=10, padx=10)
 Clear_Button.grid(column=1, row=0, pady=10, padx=10)
 Copy_First_Name_Button.grid(column=0, row=1, pady=10, padx=10)
 Copy_Last_Name_Button.grid(column=0, row=2, pady=10, padx=10)
-Copy_RSA_ID_Button.grid(column=0, row=3, pady=10, padx=10)
-Copy_Cell_Number_Button.grid(column=0, row=4, pady=10, padx=10)
-Copy_Email_Button.grid(column=0, row=5, pady=10, padx=10)
+Copy_RSA_ID_Button.grid(column=0, row=4, pady=10, padx=10)
+Copy_Cell_Number_Button.grid(column=0, row=5, pady=10, padx=10)
+Copy_Email_Button.grid(column=0, row=6, pady=10, padx=10)
 
-Firstname_Field = tk.Entry(personal, width=41)
-Lastname_Field = tk.Entry(personal, width=41)
-RSA_ID_Field = tk.Entry(personal, width=41)
-Cell_Field = tk.Entry(personal, width=41)
-Email_Field = tk.Entry(personal, width=41)
+Firstname_Field = tk.Entry(personal, width=30)
+Lastname_Field = tk.Entry(personal, width=30)
+RSA_ID_Field = tk.Entry(personal, width=30)
+Choose_Age_Field = tk.Entry(personal, width=30)
+Cell_Field = tk.Entry(personal, width=30)
+Email_Field = tk.Entry(personal, width=30)
 
 Firstname_Field.grid(column=1, row=1)
 Lastname_Field.grid(column=1, row=2)
-RSA_ID_Field.grid(column=1, row=3)
-Cell_Field.grid(column=1, row=4)
-Email_Field.grid(column=1, row=5)
+RSA_ID_Field.grid(column=1, row=4)
+Choose_Age_Field.grid(column=1, row=3)
+Cell_Field.grid(column=1, row=5)
+Email_Field.grid(column=1, row=6)
+
+Choose_Age_Label = tk.Label(personal, text='Select Age:')
+Choose_Age_Label.grid(column=0, row=3)
 
 tab_control.pack(expand=1, fill='both')
 gdf.mainloop()

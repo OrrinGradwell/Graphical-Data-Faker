@@ -10,3 +10,5 @@ For now, this will only spoof:
 * Email Address  
 
 Long term goal is to extend this to Business details as well as a few usability enhancements.
+
+pip install pyperclip
