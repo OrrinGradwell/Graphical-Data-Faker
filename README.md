@@ -1,14 +1,26 @@
 # Graphical-Data-Faker
 
-a Tool that can spoof personal details for use during development or testing.  
+a Simple tool that will generate Personal details for use during development or testing.
+
+> Only supports Python `3.7.*` for now
 
 For now, this will only spoof:  
-* First Name
-* Last Name
-* RSA ID Number
-* ZA Cell Numbers
-* Email Address  
+* `First Name`
+* `Last Name`
+* `RSA ID Number` (user can also specify age if required)
+* `ZA Cell Numbers`
+* `Email Address`  
 
-Long term goal is to extend this to Business details as well as a few usability enhancements.
+Please note that by design, this is for use in South Africa only.
 
-pip install pyperclip
+Next Steps:
+* Create this a s a standalone executable. (OS independent)  
+* Add functionality to generate Business details.
+* Internationalize the functionality to cater for Passports, etc...
+
+### Libraries Used
+* `pyperclip`
+* `random` (with randrange)
+* `tkinter` (with ttk)
+* `datetime`
+* `faker`

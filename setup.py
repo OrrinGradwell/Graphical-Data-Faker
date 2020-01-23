@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="Graphical-Data-Faker",
-    version="0.0.1",
+    version="1.1.0",
     author="Orrin Gradwell",
     author_email="kamakazy000@gmail.com",
     description="a Tool that can spoof personal details for use during development or testing.",
